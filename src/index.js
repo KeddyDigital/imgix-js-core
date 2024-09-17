@@ -1,5 +1,5 @@
 import { Base64 } from 'js-base64';
-import md5 from 'md5';
+import { Md5 } from 'ts-md5';
 import { getQuery } from 'ufo';
 import {
   DEFAULT_DPR,
@@ -135,7 +135,7 @@ export default class ImgixClient {
 
   _signParams(path, queryParams) {
     const signatureBase = this.settings.secureURLToken + path + queryParams;
-    const signature = md5(signatureBase);
+    const signature = Md5.hashStr(signatureBase);
 
     return queryParams.length > 0
       ? queryParams + '&s=' + signature
